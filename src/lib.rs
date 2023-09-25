@@ -31,11 +31,12 @@ impl Parser {
             || c == Self::SIGN_DIVIDE
     }
 
-    fn precedence(c: char) -> i32 {
-        match c {
-            Self::SIGN_PLUS | Self::SIGN_MINUS | Self::SIGN_MULTIPLY | Self::SIGN_DIVIDE => 1,
-            _ => 0,
-        }
+    fn precedence(_c: char) -> i32 {
+        // match c {
+        //     Self::SIGN_PLUS | Self::SIGN_MINUS | Self::SIGN_MULTIPLY | Self::SIGN_DIVIDE => 1,
+        //     _ => 0,
+        // }
+        1
     }
 
     fn infix_to_rpn(expression: &str) -> Vec<String> {
@@ -124,8 +125,15 @@ mod tests {
 
     #[test]
     fn test_01() {
-        let result = Parser::calculate("3b3a0".to_string());
+        let result = Parser::calculate("3 b 3 a 0".to_string());
         assert_eq!(result, 0);
+    }
+
+    #[test]
+    #[should_panic(expected = "called `Option::unwrap()")]
+
+    fn test_02() {
+        Parser::calculate("1a+".to_string());
     }
 
     #[test]
