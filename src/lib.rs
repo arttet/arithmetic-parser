@@ -11,9 +11,8 @@ impl Parser {
     /// Space Complexity: O(`len_s`)
     pub fn calculate(s: String) -> i32 {
         let tokens = Self::infix_to_rpn(&s);
-        let result = Self::eval_rpn(tokens);
 
-        result
+        Self::eval_rpn(tokens)
     }
 }
 
@@ -50,7 +49,7 @@ impl Parser {
                 continue;
             }
 
-            if token.is_digit(10) {
+            if token.is_ascii_digit() {
                 num_buffer.push(token);
             } else if Self::is_operator(token) {
                 if !num_buffer.is_empty() {
